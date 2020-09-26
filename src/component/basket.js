@@ -1,12 +1,12 @@
 import React from 'react';
 import BasketItem from "./basket-item";
 
-const Basket = ({basket,plusProduct,minusProduct}) => {
+const Basket = ({basket,plusProduct,deleteProduct}) => {
     return (
         <section>
             <div className="container jumbotron">
                 {basket.map((item) => {
-                    return <BasketItem minusProduct={minusProduct} plusProduct={plusProduct} key={item.id} {...item}/>
+                    return <BasketItem plusProduct={plusProduct} deleteProduct={deleteProduct} key={item.id} {...item}/>
                 })}
             </div>
         </section>

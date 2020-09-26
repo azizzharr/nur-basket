@@ -59,7 +59,7 @@ class App extends Component {
         const item = {...basket[index]}
         item.count += step
         if (item.count < 1){
-            return ;
+             return {basket: [...basket.slice(0,index),...basket.slice(index+1)]};
         }
         item.sum = item.count * item.rebate
         return {basket: [...basket.slice(0,index), item,...basket.slice(index+1)]};
@@ -73,7 +73,14 @@ class App extends Component {
             }
         })
     }
-
+    deleteProduct = (id) => () => {
+        this.setState(({ basket}) => {
+            const index = basket.findIndex((item) => item.id === id)
+            if (index !== -1) {
+                return {basket: [...basket.slice(0,index),...basket.slice(index+1)]}
+            }
+        })
+    }
     render() {
         return (
             <div>
@@ -85,7 +92,7 @@ class App extends Component {
 
                     </div>
                 </div>
-                <Basket minusProduct={this.minusProduct} plusProduct={this.plusProduct} basket={this.state.basket}/>
+                <Basket deleteProduct={this.deleteProduct} minusProduct={this.minusProduct} plusProduct={this.plusProduct} basket={this.state.basket}/>
             </div>
         );
     }
